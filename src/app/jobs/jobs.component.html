@@ -1,0 +1,25 @@
+<div class="center">
+  <div class="content" fxLayoutGap="16px grid">
+    <div *ngFor="let job of jobs$ | async">
+      <mat-card class="mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title>{{job.JobTitle}}</mat-card-title>
+          <mat-card-subtitle>{{job.Company}}</mat-card-subtitle>
+          <mat-card-subtitle>Job ID: {{job.id}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <button (click)="goToLink(job.JobUrl!)" mat-button>APPLY ON {{job.JobSource.toUpperCase()}}</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <mat-paginator [length]="length" [pageSize]="pageSize" (page)="handlePageEvent($event)">
+    </mat-paginator>
+  </div>
+</div>
+
+<div *ngIf="pageEvent">
+  <h5>Page Change Event Properties</h5>
+  <div>List length: {{pageEvent.length}}</div>
+  <div>Page size: {{pageEvent.pageSize}}</div>
+  <div>Page index: {{pageEvent.pageIndex}}</div>
+</div>
